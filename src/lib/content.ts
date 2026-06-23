@@ -26,12 +26,58 @@ export const GROUP_ORDER = CONTENT_TYPES;
 
 export const allContent = generatedContent as ContentMeta[];
 
+export const DEFAULT_LOCALE = "en";
+export const SUPPORTED_LOCALES = ["en", "es", "de", "fr", "pt"] as const;
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
+
+export function isSupportedLocale(locale: string): locale is SupportedLocale {
+  return SUPPORTED_LOCALES.includes(locale as SupportedLocale);
+}
+
+export function getLocalePrefix(locale = DEFAULT_LOCALE) {
+  return locale === DEFAULT_LOCALE ? "" : `/${locale}`;
+}
+
+export function getPublicSlug(item: Pick<ContentMeta, "slug">) {
+  return item.slug.replace(/^sand-raiders-of-sophie-/, "");
+}
+
+export function getArticlePath(item: Pick<ContentMeta, "category" | "slug">, locale = DEFAULT_LOCALE) {
+  const publicSlug = getPublicSlug(item);
+  const collidesWithCategory = CONTENT_TYPES.includes(publicSlug);
+
+  if (item.category === "codes" && publicSlug === "codes") {
+    return `${getLocalePrefix(locale)}/codes`;
+  }
+
+  if (collidesWithCategory) {
+    return `${getLocalePrefix(locale)}/${item.category}/${publicSlug}`;
+  }
+
+  return `${getLocalePrefix(locale)}/${publicSlug}`;
+}
+
+export function getCategoryPath(category: string, locale = DEFAULT_LOCALE) {
+  return `${getLocalePrefix(locale)}/${category}`;
+}
+
+export function getHomePath(locale = DEFAULT_LOCALE) {
+  const prefix = getLocalePrefix(locale);
+  return prefix ? `${prefix}/` : "/";
+}
+
+export function localizePath(path: string, locale = DEFAULT_LOCALE) {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  if (locale === DEFAULT_LOCALE) return cleanPath;
+  return cleanPath === "/" ? `/${locale}` : `/${locale}${cleanPath}`;
+}
+
 export function getAllContentPaths() {
   return allContent.map((item) => ({
-    locale: "en",
+    locale: DEFAULT_LOCALE,
     category: item.category,
     slug: item.slug,
-    path: `/en/${item.category}/${item.slug}`,
+    path: getArticlePath(item),
   }));
 }
 
@@ -49,6 +95,10 @@ export function getLatestContent(limit = 8) {
 
 export function getContentMeta(category: string, slug: string) {
   return allContent.find((item) => item.category === category && item.slug === slug);
+}
+
+export function getContentByPublicSlug(publicSlug: string) {
+  return allContent.find((item) => getPublicSlug(item) === publicSlug);
 }
 
 export async function getContentModule(category: string, slug: string) {

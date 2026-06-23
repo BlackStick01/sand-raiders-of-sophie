@@ -3,7 +3,22 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { WikiSidebar } from "@/components/site";
-import { getCategoryMeta, getContentByCategory, getContentMeta, getContentModule, isKnownCategory } from "@/lib/content";
+import {
+  DEFAULT_LOCALE,
+  SUPPORTED_LOCALES,
+  getArticlePath,
+  getCategoryMeta,
+  getCategoryPath,
+  getContentByCategory,
+  getContentByPublicSlug,
+  getContentMeta,
+  getContentModule,
+  getHomePath,
+  getPublicSlug,
+  isKnownCategory,
+  isSupportedLocale,
+  type ContentMeta,
+} from "@/lib/content";
 import messages from "@/locales/en.json";
 import { absoluteUrl, titleCaseSlug } from "@/lib/utils";
 
@@ -11,33 +26,79 @@ type Props = {
   params: Promise<{ locale: string; slug: string[] }>;
 };
 
+function localizedAlternates(pathForLocale: (locale: string) => string) {
+  return Object.fromEntries(
+    SUPPORTED_LOCALES.map((locale) => [locale, absoluteUrl(pathForLocale(locale))]),
+  );
+}
+
+function findArticleInCategory(category: string, slug: string) {
+  return getContentByCategory(category).find(
+    (item) => item.slug === slug || getPublicSlug(item) === slug,
+  );
+}
+
+function resolveSlug(slug: string[]) {
+  const [first, second, extra] = slug;
+  if (!first || extra) return null;
+
+  if (!second) {
+    const directArticle = getContentByPublicSlug(first);
+    if (directArticle && (first === "codes" || !isKnownCategory(first))) {
+      return { type: "article" as const, article: directArticle };
+    }
+
+    if (isKnownCategory(first)) {
+      return { type: "category" as const, category: first };
+    }
+
+    if (directArticle) {
+      return { type: "article" as const, article: directArticle };
+    }
+
+    return null;
+  }
+
+  if (!isKnownCategory(first)) return null;
+  const article = findArticleInCategory(first, second);
+  return article ? { type: "article" as const, article } : null;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const [category, articleSlug] = slug;
+  const { locale, slug } = await params;
+  const resolved = resolveSlug(slug);
+  const safeLocale = isSupportedLocale(locale) ? locale : DEFAULT_LOCALE;
 
-  if (!category) return {};
+  if (!resolved) return {};
 
-  if (!articleSlug) {
-    const categoryMeta = getCategoryMeta(category);
+  if (resolved.type === "category") {
+    const categoryMeta = getCategoryMeta(resolved.category);
     if (!categoryMeta) return {};
+    const canonical = getCategoryPath(resolved.category, safeLocale);
     return {
       title: `${categoryMeta.label} - SAND: Raiders of Sophie Wiki`,
       description: categoryMeta.description,
-      alternates: { canonical: absoluteUrl(`/en/${category}`) },
+      alternates: {
+        canonical: absoluteUrl(canonical),
+        languages: localizedAlternates((targetLocale) => getCategoryPath(resolved.category, targetLocale)),
+      },
     };
   }
 
-  const meta = getContentMeta(category, articleSlug);
-  if (!meta) return {};
+  const meta = resolved.article;
+  const canonical = getArticlePath(meta, safeLocale);
   return {
     title: meta.title,
     description: meta.description,
-    alternates: { canonical: absoluteUrl(`/en/${category}/${articleSlug}`) },
+    alternates: {
+      canonical: absoluteUrl(canonical),
+      languages: localizedAlternates((targetLocale) => getArticlePath(meta, targetLocale)),
+    },
     openGraph: {
       type: "article",
       title: meta.title,
       description: meta.description,
-      url: absoluteUrl(`/en/${category}/${articleSlug}`),
+      url: absoluteUrl(canonical),
       images: [{ url: absoluteUrl("/images/hero.webp"), width: 1920, height: 620, alt: meta.title }],
     },
     twitter: {
@@ -49,7 +110,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function CategoryPage({ category }: { category: string }) {
+function CategoryPage({ category, locale }: { category: string; locale: string }) {
   const categoryMeta = getCategoryMeta(category);
   const articles = getContentByCategory(category);
   if (!categoryMeta) notFound();
@@ -61,7 +122,7 @@ function CategoryPage({ category }: { category: string }) {
     itemListElement: articles.map((article, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: absoluteUrl(`/en/${article.path}`),
+      url: absoluteUrl(getArticlePath(article, locale)),
       name: article.title,
     })),
   };
@@ -78,7 +139,7 @@ function CategoryPage({ category }: { category: string }) {
           </div>
           <div className="mt-6 grid gap-4">
             {articles.map((article) => (
-              <Link key={article.path} href={`/en/${article.path}`} className="group rounded-lg border border-stone-800 bg-stone-950/70 p-5 transition hover:border-amber-400/50">
+              <Link key={article.path} href={getArticlePath(article, locale)} className="group rounded-lg border border-stone-800 bg-stone-950/70 p-5 transition hover:border-amber-400/50">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
                   <div>
                     <h2 className="text-xl font-black text-stone-50 group-hover:text-amber-100">{article.title}</h2>
@@ -90,18 +151,20 @@ function CategoryPage({ category }: { category: string }) {
             ))}
           </div>
         </section>
-        <WikiSidebar />
+        <WikiSidebar locale={locale} />
       </div>
     </main>
   );
 }
 
-async function ArticlePage({ category, articleSlug }: { category: string; articleSlug: string }) {
-  const meta = getContentMeta(category, articleSlug);
-  const mod = await getContentModule(category, articleSlug);
+async function ArticlePage({ article, locale }: { article: ContentMeta; locale: string }) {
+  const meta = getContentMeta(article.category, article.slug);
+  const mod = await getContentModule(article.category, article.slug);
   if (!meta || !mod) notFound();
   const Content = mod.default;
-  const categoryLabel = getCategoryMeta(category)?.label || titleCaseSlug(category);
+  const categoryLabel = getCategoryMeta(article.category)?.label || titleCaseSlug(article.category);
+  const canonicalPath = getArticlePath(meta, locale);
+  const categoryPath = getCategoryPath(article.category, locale);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -129,9 +192,9 @@ async function ArticlePage({ category, articleSlug }: { category: string; articl
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/en") },
-      { "@type": "ListItem", position: 2, name: categoryLabel, item: absoluteUrl(`/en/${category}`) },
-      { "@type": "ListItem", position: 3, name: meta.title, item: absoluteUrl(`/en/${meta.path}`) },
+      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl(getHomePath(locale)) },
+      { "@type": "ListItem", position: 2, name: categoryLabel, item: absoluteUrl(categoryPath) },
+      { "@type": "ListItem", position: 3, name: meta.title, item: absoluteUrl(canonicalPath) },
     ],
   };
 
@@ -143,9 +206,9 @@ async function ArticlePage({ category, articleSlug }: { category: string; articl
         <article className="min-w-0">
           <div className="rounded-lg border border-stone-800 bg-stone-950/76 p-6">
             <nav className="text-sm font-bold text-stone-400">
-              <Link href="/en" className="hover:text-amber-200">Home</Link>
+              <Link href={getHomePath(locale)} className="hover:text-amber-200">Home</Link>
               <span className="px-2">/</span>
-              <Link href={`/en/${category}`} className="hover:text-amber-200">{categoryLabel}</Link>
+              <Link href={categoryPath} className="hover:text-amber-200">{categoryLabel}</Link>
             </nav>
             <h1 className="mt-5 text-4xl font-black leading-tight text-stone-50 sm:text-5xl">{meta.title}</h1>
             <p className="mt-5 text-base leading-8 text-stone-400">{meta.description}</p>
@@ -155,16 +218,17 @@ async function ArticlePage({ category, articleSlug }: { category: string; articl
             <Content />
           </div>
         </article>
-        <WikiSidebar />
+        <WikiSidebar locale={locale} />
       </div>
     </main>
   );
 }
 
 export default async function SlugPage({ params }: Props) {
-  const { slug } = await params;
-  const [category, articleSlug, extra] = slug;
-  if (!category || extra || !isKnownCategory(category)) notFound();
-  if (!articleSlug) return <CategoryPage category={category} />;
-  return <ArticlePage category={category} articleSlug={articleSlug} />;
+  const { locale, slug } = await params;
+  const safeLocale = isSupportedLocale(locale) ? locale : DEFAULT_LOCALE;
+  const resolved = resolveSlug(slug);
+  if (!resolved) notFound();
+  if (resolved.type === "category") return <CategoryPage category={resolved.category} locale={safeLocale} />;
+  return <ArticlePage article={resolved.article} locale={safeLocale} />;
 }

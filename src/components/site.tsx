@@ -3,13 +3,14 @@ import Link from "next/link";
 import { BookOpen, Gamepad2, Shield, Sparkles } from "lucide-react";
 import { NAVIGATION_CONFIG } from "@/config/navigation";
 import messages from "@/locales/en.json";
-import { getLatestContent } from "@/lib/content";
+import { getArticlePath, getLatestContent, localizePath } from "@/lib/content";
+import { LanguageSwitcher } from "./language-switcher";
 
-export function SiteHeader() {
+export function SiteHeader({ locale = "en" }: { locale?: string }) {
   return (
     <header className="sticky top-0 z-50 border-b border-stone-800/80 bg-stone-950/88 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/en" className="flex min-w-0 items-center gap-3">
+        <Link href={localizePath("/", locale)} className="flex min-w-0 items-center gap-3">
           <Image src="/images/main-capsule.webp" alt="SAND: Raiders of Sophie Steam main capsule" width={92} height={53} className="h-10 w-16 rounded-sm object-cover shadow-lg shadow-black/40" priority />
           <div className="min-w-0">
             <div className="truncate text-sm font-black uppercase tracking-wide text-amber-100">{messages.site.shortName}</div>
@@ -18,20 +19,23 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
           {Object.values(NAVIGATION_CONFIG).map((item) => (
-            <Link key={item.key} href={item.href} className="rounded-md px-3 py-2 text-sm font-semibold text-stone-300 transition hover:bg-amber-400/10 hover:text-amber-100">
+            <Link key={item.key} href={localizePath(item.href, locale)} className="rounded-md px-3 py-2 text-sm font-semibold text-stone-300 transition hover:bg-amber-400/10 hover:text-amber-100">
               {item.label}
             </Link>
           ))}
         </nav>
-        <a href="https://store.steampowered.com/app/1431300/SAND_Raiders_of_Sophie/" className="rounded-md bg-amber-400 px-4 py-2 text-sm font-black text-stone-950 shadow-lg shadow-amber-950/30 transition hover:bg-amber-300" target="_blank" rel="noreferrer">
-          Steam
-        </a>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <a href="https://store.steampowered.com/app/1431300/SAND_Raiders_of_Sophie/" className="rounded-md bg-amber-400 px-4 py-2 text-sm font-black text-stone-950 shadow-lg shadow-amber-950/30 transition hover:bg-amber-300" target="_blank" rel="noreferrer">
+            Steam
+          </a>
+        </div>
       </div>
     </header>
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ locale = "en" }: { locale?: string }) {
   return (
     <footer className="border-t border-stone-800 bg-[#080706]">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-8">
@@ -51,10 +55,10 @@ export function SiteFooter() {
         <div>
           <h3 className="text-sm font-black uppercase tracking-wide text-amber-200">Site</h3>
           <div className="mt-4 grid gap-3 text-sm">
-            <Link className="text-stone-300 hover:text-amber-200" href="/en/about">About</Link>
-            <Link className="text-stone-300 hover:text-amber-200" href="/en/privacy-policy">{messages.footer.privacyPolicy}</Link>
-            <Link className="text-stone-300 hover:text-amber-200" href="/en/terms-of-service">{messages.footer.termsOfService}</Link>
-            <Link className="text-stone-300 hover:text-amber-200" href="/en/copyright">Copyright</Link>
+            <Link className="text-stone-300 hover:text-amber-200" href={localizePath("/about", locale)}>About</Link>
+            <Link className="text-stone-300 hover:text-amber-200" href={localizePath("/privacy-policy", locale)}>{messages.footer.privacyPolicy}</Link>
+            <Link className="text-stone-300 hover:text-amber-200" href={localizePath("/terms-of-service", locale)}>{messages.footer.termsOfService}</Link>
+            <Link className="text-stone-300 hover:text-amber-200" href={localizePath("/copyright", locale)}>Copyright</Link>
           </div>
         </div>
       </div>
@@ -62,7 +66,7 @@ export function SiteFooter() {
   );
 }
 
-export function WikiSidebar() {
+export function WikiSidebar({ locale = "en" }: { locale?: string }) {
   const latest = getLatestContent(6);
   return (
     <aside className="space-y-5">
@@ -73,7 +77,7 @@ export function WikiSidebar() {
         </div>
         <div className="mt-4 grid gap-2">
           {Object.values(NAVIGATION_CONFIG).map((item) => (
-            <Link key={item.key} href={item.href} className="rounded-md border border-stone-800 bg-stone-900/50 px-3 py-2 text-sm font-semibold text-stone-300 hover:border-amber-400/50 hover:text-amber-100">
+            <Link key={item.key} href={localizePath(item.href, locale)} className="rounded-md border border-stone-800 bg-stone-900/50 px-3 py-2 text-sm font-semibold text-stone-300 hover:border-amber-400/50 hover:text-amber-100">
               {item.label}
             </Link>
           ))}
@@ -92,7 +96,7 @@ export function WikiSidebar() {
             </div>
           ))}
         </div>
-        <Link href="/en/codes/sand-raiders-of-sophie-codes" className="mt-4 inline-flex text-sm font-bold text-amber-200 hover:text-amber-100">
+        <Link href={localizePath("/codes", locale)} className="mt-4 inline-flex text-sm font-bold text-amber-200 hover:text-amber-100">
           {messages.shared.viewAllCodes}
         </Link>
       </div>
@@ -103,7 +107,7 @@ export function WikiSidebar() {
         </div>
         <div className="mt-4 space-y-3">
           {latest.map((item) => (
-            <Link key={item.path} href={`/en/${item.path}`} className="block text-sm font-semibold leading-6 text-stone-300 hover:text-amber-100">
+            <Link key={item.path} href={getArticlePath(item, locale)} className="block text-sm font-semibold leading-6 text-stone-300 hover:text-amber-100">
               {item.title}
             </Link>
           ))}

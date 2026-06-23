@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, BadgeCheck, BookOpen, Boxes, CirclePlay, Compass, Fuel, ShieldAlert } from "lucide-react";
 import messages from "@/locales/en.json";
 import { cn } from "@/lib/utils";
@@ -53,6 +54,10 @@ function ModuleHighlights({ module }: { module: (typeof messages.home.explore.mo
 
 export default function HomePageClient() {
   const hero = messages.home.hero;
+  const pathname = usePathname();
+  const locale = pathname.split("/").filter(Boolean)[0];
+  const prefix = ["es", "de", "fr", "pt"].includes(locale) ? `/${locale}` : "";
+  const href = (path: string) => `${prefix}${path}`;
 
   return (
     <main>
@@ -67,14 +72,14 @@ export default function HomePageClient() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-200">{hero.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/en/guide/sand-raiders-of-sophie-beginner-guide" className="inline-flex items-center gap-2 rounded-md bg-amber-400 px-5 py-3 text-sm font-black text-stone-950 shadow-xl shadow-amber-950/30 transition hover:bg-amber-300">
+              <Link href={href("/beginner-guide")} className="inline-flex items-center gap-2 rounded-md bg-amber-400 px-5 py-3 text-sm font-black text-stone-950 shadow-xl shadow-amber-950/30 transition hover:bg-amber-300">
                 {hero.primaryCta}
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/en/trampler/sand-raiders-of-sophie-trampler-builds" className="inline-flex items-center gap-2 rounded-md border border-amber-300/40 bg-stone-950/50 px-5 py-3 text-sm font-black text-amber-100 transition hover:bg-amber-400/10">
+              <Link href={href("/trampler-builds")} className="inline-flex items-center gap-2 rounded-md border border-amber-300/40 bg-stone-950/50 px-5 py-3 text-sm font-black text-amber-100 transition hover:bg-amber-400/10">
                 {hero.secondaryCta}
               </Link>
-              <Link href="/en/codes/sand-raiders-of-sophie-codes" className="inline-flex items-center gap-2 rounded-md border border-stone-700 bg-stone-950/50 px-5 py-3 text-sm font-black text-stone-200 transition hover:border-amber-300/50 hover:text-amber-100">
+              <Link href={href("/codes")} className="inline-flex items-center gap-2 rounded-md border border-stone-700 bg-stone-950/50 px-5 py-3 text-sm font-black text-stone-200 transition hover:border-amber-300/50 hover:text-amber-100">
                 {hero.tertiaryCta}
               </Link>
             </div>
@@ -123,7 +128,7 @@ export default function HomePageClient() {
               <p className="text-sm font-black uppercase tracking-[0.2em] text-amber-300">{messages.home.start.eyebrow}</p>
               <h2 className="mt-4 text-3xl font-black text-stone-50">{messages.home.start.title}</h2>
             </div>
-            <Link href="/en/guide" className="inline-flex items-center gap-2 text-sm font-black text-amber-200 hover:text-amber-100">
+            <Link href={href("/guide")} className="inline-flex items-center gap-2 text-sm font-black text-amber-200 hover:text-amber-100">
               Browse Guides <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -146,7 +151,7 @@ export default function HomePageClient() {
             {messages.home.aboutGame.paragraphs.map((paragraph) => (
               <p key={paragraph} className="mt-5 text-base leading-8 text-stone-300">{paragraph}</p>
             ))}
-            <Link href="/en/guide" className="mt-7 inline-flex items-center gap-2 rounded-md bg-amber-400 px-5 py-3 text-sm font-black text-stone-950 hover:bg-amber-300">
+            <Link href={href("/guide")} className="mt-7 inline-flex items-center gap-2 rounded-md bg-amber-400 px-5 py-3 text-sm font-black text-stone-950 hover:bg-amber-300">
               {messages.home.aboutGame.cta}
               <ArrowRight className="h-4 w-4" />
             </Link>
@@ -183,7 +188,7 @@ export default function HomePageClient() {
                     </div>
                   </div>
                   <ModuleHighlights module={module} />
-                  <Link href={module.href} className="mt-5 inline-flex items-center gap-2 text-sm font-black text-amber-200 hover:text-amber-100">
+                  <Link href={href(module.href)} className="mt-5 inline-flex items-center gap-2 text-sm font-black text-amber-200 hover:text-amber-100">
                     Read more <ArrowRight className="h-4 w-4" />
                   </Link>
                 </article>
@@ -217,7 +222,7 @@ export default function HomePageClient() {
             <p className="mt-3 max-w-3xl text-base leading-7 text-stone-900">{messages.home.finalCta.description}</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/en/guide/sand-raiders-of-sophie-beginner-guide" className="rounded-md bg-stone-950 px-5 py-3 text-sm font-black text-amber-100 hover:bg-stone-900">
+            <Link href={href("/beginner-guide")} className="rounded-md bg-stone-950 px-5 py-3 text-sm font-black text-amber-100 hover:bg-stone-900">
               {messages.home.finalCta.primary}
             </Link>
             <a href="https://store.steampowered.com/app/1431300/SAND_Raiders_of_Sophie/" target="_blank" rel="noreferrer" className="rounded-md border border-stone-950 px-5 py-3 text-sm font-black text-stone-950 hover:bg-stone-950/10">

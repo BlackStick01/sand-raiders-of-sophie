@@ -1,36 +1,25 @@
 import type { MetadataRoute } from "next";
-import { getAllContentPaths } from "@/lib/content";
+import { CONTENT_TYPES } from "@/config/navigation";
+import { SUPPORTED_LOCALES, allContent, getArticlePath, getCategoryPath, getHomePath } from "@/lib/content";
 import { absoluteUrl } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = [
-    "/en",
-    "/en/about",
-    "/en/privacy-policy",
-    "/en/terms-of-service",
-    "/en/copyright",
-    "/en/guide",
-    "/en/codes",
-    "/en/trampler",
-    "/en/weapons",
-    "/en/loot",
-    "/en/modes",
-    "/en/system",
-    "/en/media",
-  ];
+  const staticSlugs = ["about", "privacy-policy", "terms-of-service", "copyright"];
+  const staticPaths = SUPPORTED_LOCALES.flatMap((locale) => [
+    getHomePath(locale),
+    ...staticSlugs.map((slug) => `${getHomePath(locale).replace(/\/$/, "")}/${slug}`),
+    ...CONTENT_TYPES.map((category) => getCategoryPath(category, locale)),
+  ]);
+  const articlePaths = SUPPORTED_LOCALES.flatMap((locale) =>
+    allContent.map((item) => getArticlePath(item, locale)),
+  );
 
   return [
-    ...staticPaths.map((path) => ({
+    ...[...new Set([...staticPaths, ...articlePaths])].map((path) => ({
       url: absoluteUrl(path),
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: path === "/en" ? 1 : 0.7,
-    })),
-    ...getAllContentPaths().map((item) => ({
-      url: absoluteUrl(item.path),
       lastModified: new Date("2026-06-23"),
       changeFrequency: "weekly" as const,
-      priority: 0.8,
+      priority: path === "/" ? 1 : 0.7,
     })),
   ];
 }
