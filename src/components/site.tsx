@@ -67,7 +67,7 @@ export function SiteFooter({ locale = "en" }: { locale?: string }) {
 }
 
 export function WikiSidebar({ locale = "en" }: { locale?: string }) {
-  const latest = getLatestContent(6);
+  const latest = getLatestContent(6, locale);
   return (
     <aside className="space-y-5">
       <div className="rounded-lg border border-stone-800 bg-stone-950/76 p-5 shadow-xl shadow-black/20">

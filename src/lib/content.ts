@@ -1,4 +1,5 @@
 import generatedContent from "./generated-content.json";
+import localizedContent from "./localized-content.json";
 import { mdxLoaders } from "./content-registry";
 import { CONTENT_TYPES, NAVIGATION_CONFIG } from "@/config/navigation";
 
@@ -25,6 +26,7 @@ export const GROUP_TITLES: Record<string, string> = {
 export const GROUP_ORDER = CONTENT_TYPES;
 
 export const allContent = generatedContent as ContentMeta[];
+const contentByLocale = localizedContent as Record<SupportedLocale, ContentMeta[]>;
 
 export const DEFAULT_LOCALE = "en";
 export const SUPPORTED_LOCALES = ["en", "es", "de", "fr", "pt"] as const;
@@ -81,29 +83,39 @@ export function getAllContentPaths() {
   }));
 }
 
-export function getContentByCategory(category: string) {
-  return allContent
+export function getLocalizedContent(locale = DEFAULT_LOCALE) {
+  const safeLocale = isSupportedLocale(locale) ? locale : DEFAULT_LOCALE;
+  return contentByLocale[safeLocale] || contentByLocale[DEFAULT_LOCALE] || allContent;
+}
+
+export function getContentByCategory(category: string, locale = DEFAULT_LOCALE) {
+  return getLocalizedContent(locale)
     .filter((item) => item.category === category)
     .sort((a, b) => a.title.localeCompare(b.title));
 }
 
-export function getLatestContent(limit = 8) {
-  return [...allContent]
+export function getLatestContent(limit = 8, locale = DEFAULT_LOCALE) {
+  return [...getLocalizedContent(locale)]
     .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title))
     .slice(0, limit);
 }
 
-export function getContentMeta(category: string, slug: string) {
-  return allContent.find((item) => item.category === category && item.slug === slug);
+export function getContentMeta(category: string, slug: string, locale = DEFAULT_LOCALE) {
+  return (
+    getLocalizedContent(locale).find((item) => item.category === category && item.slug === slug) ||
+    allContent.find((item) => item.category === category && item.slug === slug)
+  );
 }
 
 export function getContentByPublicSlug(publicSlug: string) {
   return allContent.find((item) => getPublicSlug(item) === publicSlug);
 }
 
-export async function getContentModule(category: string, slug: string) {
-  const key = `${category}/${slug}` as keyof typeof mdxLoaders;
-  const loader = mdxLoaders[key];
+export async function getContentModule(category: string, slug: string, locale = DEFAULT_LOCALE) {
+  const safeLocale = isSupportedLocale(locale) ? locale : DEFAULT_LOCALE;
+  const localizedKey = `${safeLocale}/${category}/${slug}` as keyof typeof mdxLoaders;
+  const fallbackKey = `${DEFAULT_LOCALE}/${category}/${slug}` as keyof typeof mdxLoaders;
+  const loader = mdxLoaders[localizedKey] || mdxLoaders[fallbackKey];
   if (!loader) return null;
   return loader();
 }

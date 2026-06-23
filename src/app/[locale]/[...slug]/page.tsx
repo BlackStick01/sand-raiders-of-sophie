@@ -85,7 +85,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const meta = resolved.article;
+  const meta = getContentMeta(resolved.article.category, resolved.article.slug, safeLocale) || resolved.article;
   const canonical = getArticlePath(meta, safeLocale);
   return {
     title: meta.title,
@@ -112,7 +112,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function CategoryPage({ category, locale }: { category: string; locale: string }) {
   const categoryMeta = getCategoryMeta(category);
-  const articles = getContentByCategory(category);
+  const articles = getContentByCategory(category, locale);
   if (!categoryMeta) notFound();
 
   const itemListJsonLd = {
@@ -158,8 +158,8 @@ function CategoryPage({ category, locale }: { category: string; locale: string }
 }
 
 async function ArticlePage({ article, locale }: { article: ContentMeta; locale: string }) {
-  const meta = getContentMeta(article.category, article.slug);
-  const mod = await getContentModule(article.category, article.slug);
+  const meta = getContentMeta(article.category, article.slug, locale);
+  const mod = await getContentModule(article.category, article.slug, locale);
   if (!meta || !mod) notFound();
   const Content = mod.default;
   const categoryLabel = getCategoryMeta(article.category)?.label || titleCaseSlug(article.category);

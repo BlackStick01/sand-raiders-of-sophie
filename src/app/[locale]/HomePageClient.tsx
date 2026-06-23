@@ -8,6 +8,64 @@ import messages from "@/locales/en.json";
 import { cn } from "@/lib/utils";
 
 const iconByIndex = [BookOpen, Boxes, BadgeCheck, Compass, Fuel, ShieldAlert, CirclePlay, ArrowRight];
+const localizedHomeCopy = {
+  es: {
+    hero: {
+      eyebrow: "Wiki comunitaria hecha por fans",
+      title: "SAND: Raiders of Sophie",
+      description: "Construye tu Trampler, recorre las dunas de Sophie, saquea ciudades en ruinas y extrae antes de que otros raiders se lleven todo.",
+      primaryCta: "Empezar guía inicial",
+      secondaryCta: "Construir tu Trampler",
+      tertiaryCta: "Ver códigos activos",
+      videoLabel: "Tráiler oficial",
+      stats: messages.home.hero.stats,
+    },
+    trailerTitle: "Mira el tráiler oficial de SAND: Raiders of Sophie",
+    trailerDescription: "Observa la escala de los Tramplers, los raids del desierto, el combate en primera persona y la presión de extracción antes de entrar a las guías.",
+  },
+  de: {
+    hero: {
+      eyebrow: "Fan-Wiki der Community",
+      title: "SAND: Raiders of Sophie",
+      description: "Baue deinen Trampler, durchstreife Sophies Dünen, plündere Ruinenstädte und extrahiere, bevor rivalisierende Raider alles mitnehmen.",
+      primaryCta: "Einsteiger-Guide starten",
+      secondaryCta: "Trampler bauen",
+      tertiaryCta: "Aktive Codes prüfen",
+      videoLabel: "Offizieller Trailer",
+      stats: messages.home.hero.stats,
+    },
+    trailerTitle: "Sieh dir den offiziellen SAND: Raiders of Sophie Trailer an",
+    trailerDescription: "Erlebe Trampler-Größe, Wüstenraids, First-Person-Kämpfe und Extraktionsdruck, bevor du in die Wiki-Bereiche eintauchst.",
+  },
+  fr: {
+    hero: {
+      eyebrow: "Wiki communautaire créé par les fans",
+      title: "SAND: Raiders of Sophie",
+      description: "Construisez votre Trampler, parcourez les dunes de Sophie, fouillez les villes en ruine et extrayez avant que les raiders rivaux ne prennent tout.",
+      primaryCta: "Commencer le guide débutant",
+      secondaryCta: "Construire votre Trampler",
+      tertiaryCta: "Voir les codes actifs",
+      videoLabel: "Bande-annonce officielle",
+      stats: messages.home.hero.stats,
+    },
+    trailerTitle: "Regardez la bande-annonce officielle de SAND: Raiders of Sophie",
+    trailerDescription: "Découvrez l'échelle des Tramplers, les raids du désert, le combat à la première personne et la pression d'extraction avant d'ouvrir les guides.",
+  },
+  pt: {
+    hero: {
+      eyebrow: "Wiki comunitária feita por fãs",
+      title: "SAND: Raiders of Sophie",
+      description: "Construa seu Trampler, percorra as dunas de Sophie, saqueie cidades em ruínas e extraia antes que raiders rivais levem tudo.",
+      primaryCta: "Começar guia inicial",
+      secondaryCta: "Construir seu Trampler",
+      tertiaryCta: "Ver códigos ativos",
+      videoLabel: "Trailer oficial",
+      stats: messages.home.hero.stats,
+    },
+    trailerTitle: "Assista ao trailer oficial de SAND: Raiders of Sophie",
+    trailerDescription: "Veja a escala dos Tramplers, os raids no deserto, o combate em primeira pessoa e a pressão da extração antes de entrar nas seções do wiki.",
+  },
+} as const;
 
 function ModuleHighlights({ module }: { module: (typeof messages.home.explore.modules)[number] }) {
   if (module.displayType === "tier-grid") {
@@ -53,10 +111,11 @@ function ModuleHighlights({ module }: { module: (typeof messages.home.explore.mo
 }
 
 export default function HomePageClient() {
-  const hero = messages.home.hero;
   const pathname = usePathname();
   const locale = pathname.split("/").filter(Boolean)[0];
   const prefix = ["es", "de", "fr", "pt"].includes(locale) ? `/${locale}` : "";
+  const copy = localizedHomeCopy[locale as keyof typeof localizedHomeCopy];
+  const hero = copy?.hero || messages.home.hero;
   const href = (path: string) => `${prefix}${path}`;
 
   return (
@@ -105,14 +164,14 @@ export default function HomePageClient() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.2em] text-amber-300">{hero.videoLabel}</p>
-            <h2 className="mt-4 text-3xl font-black text-stone-50">Watch the official SAND: Raiders of Sophie trailer</h2>
-            <p className="mt-4 text-base leading-8 text-stone-400">See the Trampler scale, desert raids, first-person combat, and extraction pressure before diving into the wiki sections.</p>
+            <h2 className="mt-4 text-3xl font-black text-stone-50">{copy?.trailerTitle || "Watch the official SAND: Raiders of Sophie trailer"}</h2>
+            <p className="mt-4 text-base leading-8 text-stone-400">{copy?.trailerDescription || "See the Trampler scale, desert raids, first-person combat, and extraction pressure before diving into the wiki sections."}</p>
           </div>
           <div className="overflow-hidden rounded-lg border border-stone-700 bg-black shadow-2xl shadow-black/50">
             <iframe
               className="aspect-video w-full"
               src="https://www.youtube.com/embed/zkH4dKTLfr4"
-              srcDoc={`<style>*{box-sizing:border-box}body{margin:0;background:#080706;font-family:Arial,sans-serif}a{position:relative;display:block;height:100vh;color:white;text-decoration:none;background:url('/images/trailer-still.webp') center/cover no-repeat}a:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,7,6,.72),rgba(8,7,6,.1))}span{position:absolute;left:32px;bottom:28px;display:inline-flex;align-items:center;gap:12px;border-radius:6px;background:#f2b632;color:#090806;padding:14px 18px;font-weight:900;font-size:14px}span:before{content:'▶';font-size:18px}</style><a href="https://www.youtube.com/embed/zkH4dKTLfr4?autoplay=1" aria-label="Play official SAND Raiders of Sophie trailer"><span>Play official trailer</span></a>`}
+              srcDoc={`<style>*{box-sizing:border-box}body{margin:0;background:#080706;font-family:Arial,sans-serif}a{position:relative;display:block;height:100vh;color:white;text-decoration:none;background:url('/images/trailer-still.webp') center/cover no-repeat}a:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,7,6,.72),rgba(8,7,6,.1))}span{position:absolute;left:32px;bottom:28px;display:inline-flex;align-items:center;gap:12px;border-radius:6px;background:#f2b632;color:#090806;padding:14px 18px;font-weight:900;font-size:14px}span:before{content:'\\25B6';font-size:18px}</style><a href="https://www.youtube.com/embed/zkH4dKTLfr4?autoplay=1" aria-label="Play official SAND Raiders of Sophie trailer"><span>Play official trailer</span></a>`}
               title="Official SAND: Raiders of Sophie trailer"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
