@@ -1,0 +1,53 @@
+import type { ComponentType } from "react";
+
+export type MdxModule = {
+  default: ComponentType;
+  metadata: { title: string; description: string; category: string; date: string };
+};
+
+export const mdxLoaders = {
+  "codes/sand-raiders-of-sophie-codes": () => import("../../content/en/codes/sand-raiders-of-sophie-codes.mdx") as Promise<MdxModule>,
+  "guide/sand-raiders-of-sophie-beginner-guide": () => import("../../content/en/guide/sand-raiders-of-sophie-beginner-guide.mdx") as Promise<MdxModule>,
+  "guide/sand-raiders-of-sophie-extraction-guide": () => import("../../content/en/guide/sand-raiders-of-sophie-extraction-guide.mdx") as Promise<MdxModule>,
+  "guide/sand-raiders-of-sophie-guide": () => import("../../content/en/guide/sand-raiders-of-sophie-guide.mdx") as Promise<MdxModule>,
+  "guide/sand-raiders-of-sophie-how-to-heal": () => import("../../content/en/guide/sand-raiders-of-sophie-how-to-heal.mdx") as Promise<MdxModule>,
+  "guide/sand-raiders-of-sophie-how-to-play-with-friends": () => import("../../content/en/guide/sand-raiders-of-sophie-how-to-play-with-friends.mdx") as Promise<MdxModule>,
+  "guide/sand-raiders-of-sophie-solo-guide": () => import("../../content/en/guide/sand-raiders-of-sophie-solo-guide.mdx") as Promise<MdxModule>,
+  "loot/sand-raiders-of-sophie-loot-guide": () => import("../../content/en/loot/sand-raiders-of-sophie-loot-guide.mdx") as Promise<MdxModule>,
+  "loot/sand-raiders-of-sophie-red-box": () => import("../../content/en/loot/sand-raiders-of-sophie-red-box.mdx") as Promise<MdxModule>,
+  "loot/sand-raiders-of-sophie-red-crate": () => import("../../content/en/loot/sand-raiders-of-sophie-red-crate.mdx") as Promise<MdxModule>,
+  "loot/sand-raiders-of-sophie-resources": () => import("../../content/en/loot/sand-raiders-of-sophie-resources.mdx") as Promise<MdxModule>,
+  "loot/sand-raiders-of-sophie-server-slam-reward": () => import("../../content/en/loot/sand-raiders-of-sophie-server-slam-reward.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-early-access": () => import("../../content/en/media/sand-raiders-of-sophie-early-access.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-gameplay": () => import("../../content/en/media/sand-raiders-of-sophie-gameplay.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-launch-date": () => import("../../content/en/media/sand-raiders-of-sophie-launch-date.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-price": () => import("../../content/en/media/sand-raiders-of-sophie-price.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-reddit": () => import("../../content/en/media/sand-raiders-of-sophie-reddit.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-release-date": () => import("../../content/en/media/sand-raiders-of-sophie-release-date.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-review": () => import("../../content/en/media/sand-raiders-of-sophie-review.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-trailer": () => import("../../content/en/media/sand-raiders-of-sophie-trailer.mdx") as Promise<MdxModule>,
+  "media/sand-raiders-of-sophie-worth-it": () => import("../../content/en/media/sand-raiders-of-sophie-worth-it.mdx") as Promise<MdxModule>,
+  "modes/sand-raiders-of-sophie-multiplayer": () => import("../../content/en/modes/sand-raiders-of-sophie-multiplayer.mdx") as Promise<MdxModule>,
+  "modes/sand-raiders-of-sophie-sandstorm": () => import("../../content/en/modes/sand-raiders-of-sophie-sandstorm.mdx") as Promise<MdxModule>,
+  "modes/sand-raiders-of-sophie-server-size": () => import("../../content/en/modes/sand-raiders-of-sophie-server-size.mdx") as Promise<MdxModule>,
+  "modes/sand-raiders-of-sophie-storm-dive": () => import("../../content/en/modes/sand-raiders-of-sophie-storm-dive.mdx") as Promise<MdxModule>,
+  "modes/sand-raiders-of-sophie-voyage-mode": () => import("../../content/en/modes/sand-raiders-of-sophie-voyage-mode.mdx") as Promise<MdxModule>,
+  "system/sand-raiders-of-sophie-battleye": () => import("../../content/en/system/sand-raiders-of-sophie-battleye.mdx") as Promise<MdxModule>,
+  "system/sand-raiders-of-sophie-controller-support": () => import("../../content/en/system/sand-raiders-of-sophie-controller-support.mdx") as Promise<MdxModule>,
+  "system/sand-raiders-of-sophie-performance": () => import("../../content/en/system/sand-raiders-of-sophie-performance.mdx") as Promise<MdxModule>,
+  "system/sand-raiders-of-sophie-ps5": () => import("../../content/en/system/sand-raiders-of-sophie-ps5.mdx") as Promise<MdxModule>,
+  "system/sand-raiders-of-sophie-steam": () => import("../../content/en/system/sand-raiders-of-sophie-steam.mdx") as Promise<MdxModule>,
+  "system/sand-raiders-of-sophie-system-requirements": () => import("../../content/en/system/sand-raiders-of-sophie-system-requirements.mdx") as Promise<MdxModule>,
+  "system/sand-raiders-of-sophie-xbox": () => import("../../content/en/system/sand-raiders-of-sophie-xbox.mdx") as Promise<MdxModule>,
+  "trampler/sand-raiders-of-sophie-how-to-drive-trampler": () => import("../../content/en/trampler/sand-raiders-of-sophie-how-to-drive-trampler.mdx") as Promise<MdxModule>,
+  "trampler/sand-raiders-of-sophie-how-to-recharge-trampler": () => import("../../content/en/trampler/sand-raiders-of-sophie-how-to-recharge-trampler.mdx") as Promise<MdxModule>,
+  "trampler/sand-raiders-of-sophie-how-to-refuel-trampler": () => import("../../content/en/trampler/sand-raiders-of-sophie-how-to-refuel-trampler.mdx") as Promise<MdxModule>,
+  "trampler/sand-raiders-of-sophie-how-to-repair-trampler": () => import("../../content/en/trampler/sand-raiders-of-sophie-how-to-repair-trampler.mdx") as Promise<MdxModule>,
+  "trampler/sand-raiders-of-sophie-trampler-builds": () => import("../../content/en/trampler/sand-raiders-of-sophie-trampler-builds.mdx") as Promise<MdxModule>,
+  "trampler/sand-raiders-of-sophie-trampler-guide": () => import("../../content/en/trampler/sand-raiders-of-sophie-trampler-guide.mdx") as Promise<MdxModule>,
+  "weapons/sand-raiders-of-sophie-best-weapons": () => import("../../content/en/weapons/sand-raiders-of-sophie-best-weapons.mdx") as Promise<MdxModule>,
+  "weapons/sand-raiders-of-sophie-combat": () => import("../../content/en/weapons/sand-raiders-of-sophie-combat.mdx") as Promise<MdxModule>,
+  "weapons/sand-raiders-of-sophie-melee": () => import("../../content/en/weapons/sand-raiders-of-sophie-melee.mdx") as Promise<MdxModule>,
+  "weapons/sand-raiders-of-sophie-pvp": () => import("../../content/en/weapons/sand-raiders-of-sophie-pvp.mdx") as Promise<MdxModule>,
+  "weapons/sand-raiders-of-sophie-weapon-tier-list": () => import("../../content/en/weapons/sand-raiders-of-sophie-weapon-tier-list.mdx") as Promise<MdxModule>,
+} as const;

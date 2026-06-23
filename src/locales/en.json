@@ -1,0 +1,284 @@
+{
+  "site": {
+    "name": "SAND: Raiders of Sophie Wiki",
+    "shortName": "SAND Wiki",
+    "description": "Fan-made SAND: Raiders of Sophie Wiki with beginner guides, Trampler builds, Voyage and Storm Dive tips, loot routes, PvPvE tactics, weapons, codes, updates, and system help.",
+    "tagline": "Build Tramplers. Raid Sophie. Extract alive.",
+    "legalNotice": "This independent fan-made wiki is not affiliated with tinyBuild, Hologryph, TowerHaus, Steam, Sony, or Microsoft."
+  },
+  "nav": {
+    "guide": "Guide",
+    "codes": "Codes",
+    "trampler": "Trampler",
+    "weapons": "Weapons",
+    "loot": "Loot",
+    "modes": "Modes",
+    "system": "System",
+    "media": "Media"
+  },
+  "guide": {
+    "overviewTitle": "SAND: Raiders of Sophie Guides",
+    "overviewDescription": "Beginner guides, extraction basics, solo tips, healing, and friend-play tutorials."
+  },
+  "codes": {
+    "overviewTitle": "SAND: Raiders of Sophie Codes",
+    "overviewDescription": "Active codes, official rewards, launch gifts, and reward tracking."
+  },
+  "trampler": {
+    "overviewTitle": "SAND: Raiders of Sophie Tramplers",
+    "overviewDescription": "Trampler builds, editor basics, driving, recharging, refueling, and repairs."
+  },
+  "weapons": {
+    "overviewTitle": "SAND: Raiders of Sophie Weapons",
+    "overviewDescription": "Weapons, PvP combat, Trampler combat, melee, and tier list content."
+  },
+  "loot": {
+    "overviewTitle": "SAND: Raiders of Sophie Loot",
+    "overviewDescription": "Loot routes, red boxes, crates, resources, extraction targets, and Server Slam rewards."
+  },
+  "modes": {
+    "overviewTitle": "SAND: Raiders of Sophie Modes",
+    "overviewDescription": "Voyage, Storm Dive, sandstorm rules, multiplayer, crew size, and server size."
+  },
+  "system": {
+    "overviewTitle": "SAND: Raiders of Sophie System",
+    "overviewDescription": "System requirements, performance, BattlEye, controller support, Steam, PS5, and Xbox."
+  },
+  "media": {
+    "overviewTitle": "SAND: Raiders of Sophie Media",
+    "overviewDescription": "Gameplay, review, trailer, release date, early access, price, and community topics."
+  },
+  "home": {
+    "meta": {
+      "title": "SAND: Raiders of Sophie Wiki - Trampler Builds, Loot",
+      "description": "SAND: Raiders of Sophie Wiki with beginner guides, Trampler builds, Voyage and Storm Dive tips, loot routes, PvPvE tactics, weapons, codes and updates."
+    },
+    "hero": {
+      "eyebrow": "Fan-Made Community Wiki",
+      "title": "SAND: Raiders of Sophie",
+      "description": "Build your own Trampler, roam the dunes of Sophie, loot ruined cities, and extract before rival raiders take everything. This wiki helps new and returning players learn builds, modes, weapons, resources, PvPvE tactics, and survival routes.",
+      "stats": [
+        "Launched Jun 22, 2026",
+        "Hotfix #1 Out Now",
+        "2 Game Modes",
+        "6 Max Crew Size",
+        "20 Steam Achievements"
+      ],
+      "primaryCta": "Start Beginner Guide",
+      "secondaryCta": "Build Your Trampler",
+      "tertiaryCta": "Check Active Codes",
+      "videoLabel": "Official trailer"
+    },
+    "start": {
+      "eyebrow": "Start Here",
+      "title": "Your SAND: Raiders of Sophie Journey",
+      "cards": [
+        {
+          "number": "1",
+          "title": "Beginner Guide",
+          "description": "Learn the core loop: build a Trampler, deploy into Sophie, gather loot, survive PvPvE encounters, and extract safely with your resources."
+        },
+        {
+          "number": "2",
+          "title": "Trampler Builds",
+          "description": "Understand engines, reactors, storage, spawn rooms, weapons, armor layout, blueprints, and how to create a base that fits solo or crew play."
+        },
+        {
+          "number": "3",
+          "title": "Voyage & Storm Dive",
+          "description": "Compare the lower-stakes Voyage mode with the higher-risk Storm Dive mode, including loot planning, extraction timing, and sandstorm pressure."
+        },
+        {
+          "number": "4",
+          "title": "Loot, Weapons & PvPvE Tactics",
+          "description": "Find useful resources, pick weapons, fight Upiors and rival crews, defend your Trampler, and avoid losing your best gear before extraction."
+        }
+      ]
+    },
+    "aboutGame": {
+      "title": "What is SAND: Raiders of Sophie?",
+      "paragraphs": [
+        "SAND: Raiders of Sophie is an open-world PvPvE extraction shooter set on the fallen planet Sophie. Players build and pilot gigantic walking bases called Tramplers, then explore procedurally generated deserts, ruined cities, shipwrecks, and hostile zones for loot.",
+        "The game mixes first-person combat, vehicle-base customization, survival pressure, PvP raids, PvE threats, and extraction risk. Whether you play solo or with a crew, your Trampler is your home, inventory, weapon platform, escape tool, and biggest strategic advantage."
+      ],
+      "stats": [
+        { "label": "Developer", "value": "Hologryph, TowerHaus" },
+        { "label": "Publisher", "value": "tinyBuild" },
+        { "label": "Platform", "value": "PC Steam, PS5, Xbox Series X|S" },
+        { "label": "Genre", "value": "PvPvE Extraction Shooter" },
+        { "label": "Game Modes", "value": "Voyage, Storm Dive" },
+        { "label": "Max Crew Size", "value": "6 Players" },
+        { "label": "Server Size", "value": "15 / 36 / 45 Players" },
+        { "label": "Steam Achievements", "value": "20" }
+      ],
+      "cta": "Explore All Guides"
+    },
+    "explore": {
+      "title": "Explore the SAND: Raiders of Sophie Wiki",
+      "description": "Eight focused sections cover the questions players search for most: first runs, Tramplers, codes, modes, loot, combat, multiplayer, and performance.",
+      "modules": [
+        {
+          "order": 1,
+          "name": "SAND Raiders of Sophie Beginner Guide",
+          "description": "A practical first-stop guide for new raiders learning the core loop of SAND: build a Trampler, deploy to Sophie, loot resources, survive PvPvE encounters, and extract safely.",
+          "href": "/en/guide/sand-raiders-of-sophie-beginner-guide",
+          "displayType": "step-by-step",
+          "highlights": [
+            { "label": "1", "detail": "Start by understanding that the Trampler is your mobile base, transport, storage, protection, and main strategic asset." },
+            { "label": "2", "detail": "Use the Trampler Editor before deployment to build a walker that matches your crew size and playstyle." },
+            { "label": "3", "detail": "Deploy solo or with friends, then explore cities, ruins, shipwrecks, and remnants of Sophie for loot, weapons, ammo, and resources." },
+            { "label": "4", "detail": "Extract with your loot, life, and Trampler intact instead of overextending into PvP, Upiors, or sandstorm pressure." }
+          ]
+        },
+        {
+          "order": 2,
+          "name": "SAND Raiders of Sophie Trampler Builds",
+          "description": "A build-focused module for the game's most unique SEO topic: Tramplers, fortress builds, turret-heavy war machines, smaller escape designs, and modular layouts.",
+          "href": "/en/trampler/sand-raiders-of-sophie-trampler-builds",
+          "displayType": "tier-grid",
+          "highlights": [
+            { "label": "S", "detail": "Fortress Trampler: focuses on armor, protection, storage, and surviving raids while carrying valuable loot.", "badge": "Defensive" },
+            { "label": "A", "detail": "War Machine Trampler: stacks mounted turrets and firepower for aggressive PvPvE fights on the dunes.", "badge": "Combat" },
+            { "label": "B", "detail": "Small Escape Trampler: prioritizes getting into and out of trouble quickly, useful for scouting and extraction.", "badge": "Mobility" },
+            { "label": "C", "detail": "Chaotic Modular Trampler: uses unusual layouts to confuse boarders, but needs testing before serious Storm Dive use.", "badge": "Experimental" }
+          ]
+        },
+        {
+          "order": 3,
+          "name": "SAND Raiders of Sophie Codes",
+          "description": "A code-tracking module for players searching for codes, free rewards, launch gifts, and official redemption updates.",
+          "href": "/en/codes/sand-raiders-of-sophie-codes",
+          "displayType": "code-cards",
+          "highlights": [
+            { "label": "None", "detail": "No official active redeem code is confirmed through Steam announcements or tinyBuild support.", "badge": "No Active Code" },
+            { "label": "Server Slam", "detail": "Server Slam participants receive an exclusive skin for the M1866/9 Einzel Breechloader after buying the game.", "badge": "Official Reward" }
+          ]
+        },
+        {
+          "order": 4,
+          "name": "SAND Raiders of Sophie Voyage and Storm Dive",
+          "description": "A mode comparison module covering Voyage as a lower-stakes persistent option and Storm Dive as a higher-risk sandstorm-driven mode.",
+          "href": "/en/modes/sand-raiders-of-sophie-voyage-mode",
+          "displayType": "card-list",
+          "highlights": [
+            { "label": "Voyage", "detail": "Lower-stakes persistent open-world mode where players can test builds, scavenge lower-tier items, and decide when to extract." },
+            { "label": "Storm Dive", "detail": "Higher-risk battle royale-style mode with higher-tier loot, greater rewards, and a sandstorm that moves toward the map center." },
+            { "label": "Extraction", "detail": "Voyage has no fixed expedition time limit, while Storm Dive is limited by the sandstorm but still allows extraction." },
+            { "label": "Editor", "detail": "Both modes rely heavily on the Trampler Editor, where players construct a Trampler from scratch using different components." }
+          ]
+        },
+        {
+          "order": 5,
+          "name": "SAND Raiders of Sophie Loot and Extraction Guide",
+          "description": "A loot-route module for searches around resources, weapons, shipwrecks, ruined cities, and how to extract without losing everything.",
+          "href": "/en/loot/sand-raiders-of-sophie-loot-guide",
+          "displayType": "card-list",
+          "highlights": [
+            { "label": "Cities", "detail": "Ruined cities are official exploration targets where players scavenge valuable loot, weapons, ammo, and resources." },
+            { "label": "Ruins", "detail": "Ruins and remnants of the fallen world are key places to search during expeditions." },
+            { "label": "Shipwrecks", "detail": "Shipwrecks are official loot locations mentioned as part of the expedition loop." },
+            { "label": "Extract", "detail": "Return to extraction with your spoils, life, and Trampler intact." }
+          ]
+        },
+        {
+          "order": 6,
+          "name": "SAND Raiders of Sophie Weapons and Combat",
+          "description": "A combat module for searches around guns, melee kills, Trampler damage, PvP, Upiors, and first-person fighting.",
+          "href": "/en/weapons/sand-raiders-of-sophie-combat",
+          "displayType": "card-list",
+          "highlights": [
+            { "label": "PvPvE", "detail": "Players fight rival raiders, undead former inhabitants, and mysterious supernatural Upiors during expeditions." },
+            { "label": "Trampler Combat", "detail": "Tramplers can be fortified and weaponized for large-scale combat across the dunes of Sophie." },
+            { "label": "Long Range", "detail": "Use range, sightlines, and Trampler cover before committing valuable equipment." },
+            { "label": "Melee", "detail": "Close-quarters fights matter during boarding, looting, and emergency defense." }
+          ]
+        },
+        {
+          "order": 7,
+          "name": "SAND Raiders of Sophie Multiplayer and Server Size",
+          "description": "A multiplayer module for solo play, crew sizes, and how many players each server type supports.",
+          "href": "/en/modes/sand-raiders-of-sophie-server-size",
+          "displayType": "card-list",
+          "highlights": [
+            { "label": "Solo", "detail": "Solo servers support up to 15 players." },
+            { "label": "Small Teams", "detail": "Small team servers for 2-3 player crews support up to 36 players." },
+            { "label": "Large Teams", "detail": "Large team servers for 4-6 player crews support up to 45 players." },
+            { "label": "Crew Size", "detail": "Maximum crew size is 6, and larger crews should prepare enough crew rooms on their Trampler." }
+          ]
+        },
+        {
+          "order": 8,
+          "name": "SAND Raiders of Sophie System Requirements and Performance",
+          "description": "A technical module for checking whether a PC can run SAND and how to troubleshoot launch, loading, BattlEye, or connectivity problems.",
+          "href": "/en/system/sand-raiders-of-sophie-system-requirements",
+          "displayType": "card-list",
+          "highlights": [
+            { "label": "Minimum", "detail": "Windows 10 64bit, Intel Core i5 8th Gen or Ryzen 5 2000 Series, 16 GB RAM, GTX 1650 / RX570 / Arc A380, DirectX 11, 11 GB storage." },
+            { "label": "Recommended", "detail": "Windows 11 64bit, Intel Core i5 13th Gen or Ryzen 5 7000 Series, 32 GB RAM, RTX 3080 / RX 6800 XT, DirectX 11, 11 GB storage." },
+            { "label": "Troubleshooting", "detail": "Official support and launch notes cover server stability, performance, crash reports, and optimization tracking during Early Access." },
+            { "label": "Anti-Cheat", "detail": "SAND uses BattlEye Anti-Cheat." }
+          ]
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "What is SAND: Raiders of Sophie about?",
+        "answer": "SAND: Raiders of Sophie is a PvPvE extraction shooter where players build Tramplers, raid a procedurally generated desert world, fight rival crews and creatures, then extract with loot."
+      },
+      {
+        "question": "Can SAND: Raiders of Sophie be played solo?",
+        "answer": "Yes. Solo servers support up to 15 players, while team servers support larger crews and higher total player counts."
+      },
+      {
+        "question": "Does SAND: Raiders of Sophie have active codes?",
+        "answer": "No official active redeem code is confirmed right now. This wiki tracks Steam announcements and official support updates for future rewards."
+      },
+      {
+        "question": "What is a Trampler in SAND: Raiders of Sophie?",
+        "answer": "A Trampler is a customizable walking base that works as transport, storage, defense, weapon platform, and extraction support."
+      }
+    ],
+    "finalCta": {
+      "title": "Ready to Master SAND: Raiders of Sophie?",
+      "description": "From your first Trampler blueprint to high-risk Storm Dive extractions, this community wiki gives you practical routes, builds, mode explanations, weapon notes, and PvPvE survival tactics.",
+      "primary": "Read the Beginner Guide",
+      "secondary": "Play on Steam"
+    }
+  },
+  "footer": {
+    "aboutTitle": "SAND: Raiders of Sophie Wiki",
+    "about": "SAND: Raiders of Sophie Wiki is an independent fan-made guide hub for players learning Tramplers, loot routes, weapons, modes, and PvPvE survival. It focuses on practical beginner guides, build references, extraction tips, and update tracking for the community.",
+    "description": "Open-world PvPvE extraction shooter on Steam. Build Tramplers, loot Sophie, fight rival crews, survive and extract.",
+    "playGame": "Play SAND: Raiders of Sophie",
+    "officialDiscord": "Official Discord",
+    "officialYoutube": "Official YouTube",
+    "communityTool": "Trampler Build Planner",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "shared": {
+    "wikiNavigation": "Wiki Navigation",
+    "activeCodes": "Active Codes",
+    "viewAllCodes": "View all codes",
+    "home": "Home",
+    "readMore": "Read more",
+    "latestArticles": "Latest Articles",
+    "allArticles": "All Articles"
+  },
+  "sidebarCodes": [
+    {
+      "code": "None",
+      "reward": "No official active redeem code confirmed"
+    },
+    {
+      "code": "None",
+      "reward": "Check official channels for future rewards"
+    }
+  ],
+  "metadata": {
+    "title": "SAND: Raiders of Sophie Wiki - Trampler Builds, Loot",
+    "description": "SAND: Raiders of Sophie Wiki with beginner guides, Trampler builds, Voyage and Storm Dive tips, loot routes, PvPvE tactics, weapons, codes and updates.",
+    "keywords": "SAND Raiders of Sophie, Steam, Trampler builds, loot, PvPvE, weapons, codes"
+  }
+}
