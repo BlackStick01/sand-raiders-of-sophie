@@ -19,7 +19,39 @@ export const metadata: Metadata = {
     template: "%s | SAND: Raiders of Sophie Wiki",
   },
   description: "Fan-made SAND: Raiders of Sophie Wiki with guides, Trampler builds, loot routes, modes, codes, and PvPvE tips.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   manifest: "/manifest.json",
+  openGraph: {
+    type: "website",
+    url: "https://sand-raiders-of-sophie-wiki.wiki/",
+    siteName: "SAND: Raiders of Sophie Wiki",
+    title: "SAND: Raiders of Sophie Wiki",
+    description: "Fan-made SAND: Raiders of Sophie Wiki with guides, Trampler builds, loot routes, modes, codes, and PvPvE tips.",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SAND: Raiders of Sophie Wiki preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SAND: Raiders of Sophie Wiki",
+    description: "Fan-made SAND: Raiders of Sophie Wiki with guides, Trampler builds, loot routes, modes, codes, and PvPvE tips.",
+    images: ["/images/og-image.png"],
+  },
 };
 
 export default function RootLayout({

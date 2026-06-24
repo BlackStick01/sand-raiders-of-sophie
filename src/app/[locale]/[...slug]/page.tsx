@@ -99,13 +99,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: meta.title,
       description: meta.description,
       url: absoluteUrl(canonical),
-      images: [{ url: absoluteUrl("/images/hero.webp"), width: 1920, height: 620, alt: meta.title }],
+      images: [{ url: absoluteUrl("/images/og-image.png"), width: 1200, height: 630, alt: meta.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: [absoluteUrl("/images/hero.webp")],
+      images: [absoluteUrl("/images/og-image.png")],
     },
   };
 }
@@ -173,7 +173,13 @@ async function ArticlePage({ article, locale }: { article: ContentMeta; locale: 
     description: meta.description,
     datePublished: meta.date,
     dateModified: meta.date,
-    image: absoluteUrl("/images/hero.webp"),
+    image: absoluteUrl("/images/og-image.png"),
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/images/og-image.png"),
+      width: 1200,
+      height: 630,
+    },
     author: {
       "@type": "Organization",
       name: messages.site.name,

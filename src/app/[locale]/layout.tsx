@@ -35,13 +35,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: messages.site.name,
       title: messages.metadata.title,
       description: messages.metadata.description,
-      images: [{ url: absoluteUrl("/images/hero.webp"), width: 1920, height: 620, alt: "SAND: Raiders of Sophie desert Trampler hero art" }],
+      images: [{ url: absoluteUrl("/images/og-image.png"), width: 1200, height: 630, alt: "SAND: Raiders of Sophie Wiki preview" }],
     },
     twitter: {
       card: "summary_large_image",
       title: messages.metadata.title,
       description: messages.metadata.description,
-      images: [absoluteUrl("/images/hero.webp")],
+      images: [absoluteUrl("/images/og-image.png")],
     },
   };
 }
@@ -58,17 +58,32 @@ export default async function LocaleLayout({ children, params }: Props) {
     name: messages.site.name,
     url: absoluteUrl(getHomePath(locale)),
     logo: absoluteUrl("/images/main-capsule.webp"),
-    image: absoluteUrl("/images/hero.webp"),
+    image: absoluteUrl("/images/og-image.png"),
     sameAs: [
       "https://sand-game.com/",
       "https://store.steampowered.com/app/1431300/SAND_Raiders_of_Sophie/",
       "https://www.youtube.com/watch?v=zkH4dKTLfr4",
     ],
   };
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: messages.site.name,
+    url: absoluteUrl(getHomePath(locale)),
+    description: messages.metadata.description,
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/images/og-image.png"),
+      width: 1200,
+      height: 630,
+    },
+    image: absoluteUrl("/images/og-image.png"),
+  };
 
   return (
     <NextIntlClientProvider messages={intlMessages}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
       <div className="min-h-screen bg-[#090806] text-stone-100">
         <SiteHeader locale={safeLocale} />
         {children}

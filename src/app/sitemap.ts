@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-06-23"),
       changeFrequency: "weekly" as const,
       priority: path === "/" ? 1 : 0.7,
+      images: [absoluteUrl("/images/og-image.png")],
     })),
   ];
 }
