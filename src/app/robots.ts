@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: "/ads/",
     },
     sitemap: absoluteUrl("/sitemap.xml"),
     host: process.env.NEXT_PUBLIC_SITE_URL || "https://sand-raiders-of-sophie-wiki.wiki",

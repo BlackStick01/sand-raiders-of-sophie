@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import { InlineRectangleAd } from "@/components/ads/InlineRectangleAd";
+import { ResponsiveLeaderboardAd } from "@/components/ads/ResponsiveLeaderboardAd";
 import { WikiSidebar } from "@/components/site";
 import {
   DEFAULT_LOCALE,
@@ -220,9 +222,11 @@ async function ArticlePage({ article, locale }: { article: ContentMeta; locale: 
             <p className="mt-5 text-base leading-8 text-stone-400">{meta.description}</p>
             <div className="mt-5 text-sm font-bold uppercase tracking-wide text-amber-300">Updated {meta.date}</div>
           </div>
+          <ResponsiveLeaderboardAd />
           <div className="mt-6 rounded-lg border border-stone-800 bg-stone-950/65 p-6">
             <Content />
           </div>
+          <InlineRectangleAd />
         </article>
         <WikiSidebar locale={locale} />
       </div>
