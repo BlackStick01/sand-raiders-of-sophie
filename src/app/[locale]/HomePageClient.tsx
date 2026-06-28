@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, BadgeCheck, BookOpen, Boxes, CirclePlay, Compass, Fuel, ShieldAlert } from "lucide-react";
-import { ResponsiveLeaderboardAd } from "@/components/ads/ResponsiveLeaderboardAd";
+import { ResponsiveContentAd } from "@/components/ads/ResponsiveContentAd";
 import messages from "@/locales/en.json";
 import { cn } from "@/lib/utils";
 
@@ -161,7 +161,7 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <ResponsiveLeaderboardAd />
+      <ResponsiveContentAd label="Advertisement" className="my-6" />
 
       <section className="border-b border-stone-800 bg-[#11100d]">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">

@@ -2,49 +2,30 @@ export const adsConfig = {
   enabled: true,
 
   slots: {
-    sticky320x50: {
+    mobileBanner: {
       enabled: true,
-      src: "/ads/banner-320x50.html",
+      key: "b3bb06fe0c9ae86cc6fe991b4e637806",
       width: 320,
       height: 50,
+      devices: ["mobile"],
     },
-    leaderboard728x90: {
+    desktopLeaderboard: {
       enabled: true,
-      src: "/ads/banner-728x90.html",
+      key: "b580dde9b65d33db0c10aa112dab5751",
       width: 728,
       height: 90,
+      devices: ["desktop"],
     },
-    banner468x60: {
+    contentRectangle: {
       enabled: true,
-      src: "/ads/banner-468x60.html",
-      width: 468,
-      height: 60,
-    },
-    rectangle300x250: {
-      enabled: true,
-      src: "/ads/rectangle-300x250.html",
+      key: "55ecddd2ea4068673383c05a6afdb9db",
       width: 300,
       height: 250,
+      devices: ["mobile", "desktop"],
     },
-    side160x300: {
-      enabled: true,
-      src: "/ads/side-160x300.html",
-      width: 160,
-      height: 300,
-    },
-    side160x600: {
-      enabled: true,
-      src: "/ads/side-160x600.html",
-      width: 160,
-      height: 600,
-    },
-  },
-
-  layout: {
-    contentMaxWidth: 1280,
-    sideAdOffset: 188,
-    sideAdTop: 96,
   },
 
   excludedPathSegments: ["privacy-policy", "terms-of-service", "copyright"],
 } as const;
+
+export type AdSlotKey = keyof typeof adsConfig.slots;
