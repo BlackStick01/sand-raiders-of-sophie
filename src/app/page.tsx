@@ -1,4 +1,5 @@
 import HomePageClient from "./[locale]/HomePageClient";
+import { SiteAds } from "@/components/ads/SiteAds";
 import { SiteFooter, SiteHeader } from "@/components/site";
 import messages from "@/locales/en.json";
 import { absoluteUrl } from "@/lib/utils";
@@ -23,6 +24,7 @@ export default function RootPage() {
     <div className="min-h-screen bg-[#090806] text-stone-100">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
       <SiteHeader />
+      <SiteAds />
       <HomePageClient />
       <SiteFooter />
     </div>

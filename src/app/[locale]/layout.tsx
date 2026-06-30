@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
+import { SiteAds } from "@/components/ads/SiteAds";
 import { SiteFooter, SiteHeader } from "@/components/site";
 import { routing } from "@/i18n/routing";
 import messages from "@/locales/en.json";
@@ -86,6 +87,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
       <div className="min-h-screen bg-[#090806] text-stone-100">
         <SiteHeader locale={safeLocale} />
+        <SiteAds />
         {children}
         <SiteFooter locale={safeLocale} />
       </div>
